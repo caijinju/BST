@@ -1,0 +1,20 @@
+checkID()
+	┣ ce置0
+	┣ poweroff()
+	┃		┣ 写CFG_TOP
+	┃ 		┗ 写0x19寄存器
+	┣ DisableRSSI()
+	┃		┗ 写REG_RSSI寄存器
+	┣ Init()
+	┃	┣ Initial_reg_array() : 写2.4G寄存器值，初始化寄存器
+	┃	┣ 写REG_AA值为0x00
+	┃	┣ RF_ID()
+	┃	┃	┣ 设置发送地址（写REG_TX_ADDR寄存器）
+	┃	┃	┗ 设置接收地址（写REG_RX_ADDR_P0寄存器）
+	┃	┣ SET_DR() : 写REG_SETUP_RF寄存器，设置dataRate
+	┃	┗ SETRF_PWR() : 设置RF在TX模式下的发射功率（写REG_SETUP_RF寄存器）
+	┗ PowerOn()
+			┣ 写0x19寄存器
+			┣ 写CFG_TOP寄存器
+			┣ 延时7ms
+			┗ Enable5dbm() : 设置发射率为5dBm，实际上是写REG_SETUP_RF寄存器。
